@@ -3,5 +3,8 @@ dist/
 *.whl
 *.gz
 *.pyc
+*.iml
 __pycache__
 .idea/
+.idea/*.iml
+
