@@ -5,6 +5,6 @@ dist/
 *.pyc
 *.iml
 __pycache__
-.idea/
+**/.idea/
 .idea/*.iml
 
