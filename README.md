@@ -4,3 +4,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d41463e860801f3c92da/maintainability)](https://codeclimate.com/github/Asgef/python-project-50/maintainability)
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d41463e860801f3c92da/test_coverage)](https://codeclimate.com/github/Asgef/python-project-50/test_coverage)
+
+
+Brief overview of how the 'gendiff' application works
+
+[![asciicast](https://asciinema.org/a/V9kM8csaoldL2BOQH0xGdD9b5.svg)](https://asciinema.org/a/V9kM8csaoldL2BOQH0xGdD9b5)
