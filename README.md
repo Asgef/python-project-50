@@ -5,6 +5,8 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d41463e860801f3c92da/test_coverage)](https://codeclimate.com/github/Asgef/python-project-50/test_coverage)
 
+[![linter-test](https://github.com/Asgef/python-project-50/actions/workflows/main.yml/badge.svg)](https://github.com/Asgef/python-project-50/actions/workflows/main.yml)
+
 
 Brief overview of how the 'gendiff' application works
 
