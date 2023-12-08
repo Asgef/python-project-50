@@ -1,13 +1,22 @@
 import json
+import yaml
 
 
-def generate_diff(path_file1, path_file2):
-    with open(path_file1) as file1, open(path_file2) as file2:
-        file1 = json.load(file1)
-        file2 = json.load(file2)
+def generate_diff(file1, file2):
+    file1 = open_file(file1)
+    file2 = open_file(file2)
+
     data = select_data(file1, file2)
     analyze = analyze_data(data)
     return analyze
+
+
+def open_file(file_path):
+    with open(file_path, 'r') as file:
+        if file_path.endswith('.json'):
+            return json.load(file)
+        else:
+            return yaml.safe_load(file)
 
 
 def select_data(file1, file2):
