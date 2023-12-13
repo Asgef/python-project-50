@@ -1,4 +1,4 @@
-from gendiff.construction_diff import add_node, create_diff
+from gendiff.construction_diff import add_node, create_diff, format_value, open_file
 
 
 def test_add_node():
@@ -12,8 +12,8 @@ def test_add_node_changed():
 
 
 def test_add_node_unchanged():
-    node = add_node('key3', 'unchanged', value_old='value1', value_new='value2')
-    assert node == {'key': 'key3', 'status': 'unchanged', 'value_old': 'value1', 'value_new': 'value2'}
+    node = add_node('key3', 'unchanged', value_old='value1')
+    assert node == {'key': 'key3', 'status': 'unchanged', 'value_old': 'value1'}
 
 
 def test_add_node_rm():
@@ -29,22 +29,41 @@ def test_nested_node():
 
 def test_create_diff():
     data1 = {
-        'key1': 'value1',
+        'key1': None,
         'key2': 'value2',
         'key3': {'nested_key': 'nested_value'}
     }
 
     data2 = {
-        'key1': 'value1',
+        'key1': None,
         'key3': {'nested_key': 'modified_nested_value'},
-        'key4': 'value4'
+        'key4': True
     }
 
     assert create_diff(data1, data2) == [
-        {'key': 'key1', 'status': 'unchanged', 'value_old': 'value1'},
+        {'key': 'key1', 'status': 'unchanged', 'value_old': 'null'},
         {'key': 'key2', 'status': 'removed', 'value_old': 'value2'},
         {'key': 'key3', 'status': 'nested', 'children': [
             {'key': 'nested_key', 'status': 'changed', 'value_old': 'nested_value',
              'value_new': 'modified_nested_value'}]},
-        {'key': 'key4', 'status': 'added', 'value_new': 'value4'}
+        {'key': 'key4', 'status': 'added', 'value_new': 'true'}
     ]
+
+
+def test_format_value():
+    assert format_value(True) == 'true'
+    assert format_value(False) == 'false'
+    assert format_value(None) == 'null'
+    assert format_value(42) == '42'
+    assert format_value([42]) == '[42]'
+
+
+def test_open_file():
+    expected = {
+        "host": "hexlet.io",
+        "timeout": 50,
+        "proxy": "123.234.53.22",
+        "follow": False
+    }
+    assert open_file('fixtures/file1.json') == expected
+    assert open_file('fixtures/file1.yml') == expected
