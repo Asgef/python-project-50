@@ -56,6 +56,7 @@ def test_format_value():
     assert format_value(None) == 'null'
     assert format_value(42) == '42'
     assert format_value([42]) == '[42]'
+    assert format_value({'value': {'val1': True}}) == {'value': {'val1': 'true'}}
 
 
 def test_open_file():
@@ -65,5 +66,5 @@ def test_open_file():
         "proxy": "123.234.53.22",
         "follow": False
     }
-    assert open_file('fixtures/file1.json') == expected
-    assert open_file('fixtures/file1.yml') == expected
+    assert open_file('/home/asgef/projects/python-project-50/tests/fixtures/file1.json') == expected
+    assert open_file('/home/asgef/projects/python-project-50/tests/fixtures/file1.yml') == expected

@@ -27,13 +27,17 @@ def create_diff(file1, file2):
         elif key not in file1 and key in file2:
             node = add_node(key, 'added', value_new=format_value(file2[key]))
         elif file1[key] == file2[key]:
-            node = add_node(key, 'unchanged', value_old=format_value(file1[key]))
+            node = add_node(
+                key, 'unchanged', value_old=format_value(file1[key])
+            )
         elif isinstance(file1[key], dict) and isinstance(file2[key], dict):
             child = create_diff(file1[key], file2[key])
             node = add_node(key, 'nested', children=child)
         else:
             node = add_node(
-                key, 'changed', value_old=format_value(file1[key]), value_new=format_value(file2[key])
+                key, 'changed',
+                value_old=format_value(file1[key]),
+                value_new=format_value(file2[key])
             )
 
         diff.append(node)
@@ -41,12 +45,17 @@ def create_diff(file1, file2):
 
 
 def format_value(data):
+    nested_dict = {}
     if isinstance(data, bool):
         return str(data).lower()
     elif data is None:
         return 'null'
+    elif isinstance(data, dict):
+        for key in data:
+            nested_dict[key] = format_value(data[key])
     else:
         return str(data)
+    return nested_dict
 
 
 def open_file(file_path):

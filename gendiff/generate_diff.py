@@ -9,5 +9,3 @@ def generate_diff(file1, file2):
     # data = create_diff(file1, file2)
     # # analyze = _(data)
     # return analyze
-
-

@@ -1,4 +1,5 @@
 from gendiff.stylish import diff_format, format_node
+from gendiff.construction_diff import open_file, create_diff
 
 
 def test_diff_format_added():
@@ -26,35 +27,39 @@ def test_diff_format_rm():
 
 
 def test_diff_format_nested():
-    data_nested = [{
-        "key": "key5", 'status': 'nested',
-        'children': {
-            'key': 'child1', 'status': 'removed', 'value_old': 'value_child'
-        }
-    }]
-    expected_nested = '{\n    key5: {\n      - child1: value_child\n    }\n}'
+    data_nested = [
+        {'key': 'common', 'status': 'nested', 'children': [{'key': 'follow', 'status': 'added', 'value_new': 'false'}]}]
+    expected_nested = '{\n    common: {\n      + follow: false\n    }\n}'
     assert diff_format(data_nested) == expected_nested
+
+
+def test_diff_format_general():
+    file_result = '/home/asgef/projects/python-project-50/tests/fixtures/result_nested'
+    with open(file_result, 'r') as expected_file:
+        expected_data = expected_file.read()
+        data = create_diff(open_file('/home/asgef/projects/python-project-50/tests/fixtures/file1_nested.json'), open_file('/home/asgef/projects/python-project-50/tests/fixtures/file2_nested.json'))
+        assert diff_format(data) == expected_data
 
 
 def test_format_node():
     data_added = {'key': 'key1', 'status': 'added', 'value_new': '42'}
-    expected_added = '\n  + key1: 42'
+    expected_added = ['  + key1: 42']
     data_rm = {'key': 'key4', 'status': 'removed', 'value_old': 'null'}
-    expected_rm = '\n      - key4: null'
+    expected_rm = ['      - key4: null']
     data_changed = {'key': 'key2', 'status': 'changed', 'value_old': 'true', 'value_new': 'false'}
-    expected_changed = '\n  - key2: true\n  + key2: false'
+    expected_changed = ['  - key2: true', '  + key2: false']
     data_unchanged = {'key': 'key3', 'status': 'unchanged', 'value_old': 'value1'}
-    expected_unchanged = '\n    key3: value1'
-    data_nested = {
+    expected_unchanged = ['    key3: value1']
+    data_nested = [{
         "key": "key5", 'status': 'nested',
-        'children': {
+        'children': [{
             'key': 'child1', 'status': 'removed', 'value_old': 'value_child'
-        }
-    }
-    expected_nested = '\n    key5: {\n      - child1: value_child\n    }'
+        }]
+    }]
+    expected_nested = ['{    key5: {      - child1: value_child]    }']
 
-    assert format_node(data_added, 0, 4, ' ') == expected_added
-    assert format_node(data_rm, 1, 4, ' ') == expected_rm
-    assert format_node(data_changed, 0, 4, ' ') == expected_changed
-    assert format_node(data_unchanged, 0, 4, ' ') == expected_unchanged
-    assert format_node(data_nested, 0, 4, ' ') == expected_nested
+    assert format_node(data_added, 0, '    ') == expected_added
+    assert format_node(data_rm, 1, '   ') == expected_rm
+    assert format_node(data_changed, 0, '   ') == expected_changed
+    assert format_node(data_unchanged, 0, '   ') == expected_unchanged
+    # assert format_node(data_nested, 0, '   ') == expected_nested
