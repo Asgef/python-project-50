@@ -1,4 +1,5 @@
 from gendiff.construction_diff import add_node, create_diff, format_value, open_file
+import os
 
 
 def test_add_node():
@@ -60,11 +61,12 @@ def test_format_value():
 
 
 def test_open_file():
+    test_directory = os.path.dirname(__file__)
     expected = {
         "host": "hexlet.io",
         "timeout": 50,
         "proxy": "123.234.53.22",
         "follow": False
     }
-    assert open_file('/home/asgef/projects/python-project-50/tests/fixtures/file1.json') == expected
-    assert open_file('/home/asgef/projects/python-project-50/tests/fixtures/file1.yml') == expected
+    assert open_file(os.path.join(test_directory, 'fixtures/file1.json')) == expected
+    assert open_file(os.path.join(test_directory, 'fixtures/file1.yml')) == expected

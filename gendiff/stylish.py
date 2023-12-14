@@ -1,11 +1,11 @@
 import itertools
-# from gendiff.construction_diff import open_file, create_diff
+
 
 TEMPLATE_STYLISH = '{}  {}{}: {}'
 TEMPLATE_NESTED = '{}    {}: {}'
 
 
-def diff_format(data, depth=0):
+def diff_stylish_format(data, depth=0):
     lines = []
     indent_char = '    '
     indent = indent_char * depth
@@ -36,7 +36,7 @@ def format_node(data, depth, indent):
     elif data['status'] == 'nested':
         line.append(
             TEMPLATE_STYLISH.format(indent, '  ', data['key'],
-                                    diff_format(
+                                    diff_stylish_format(
                                         data['children'],
                                         depth + step
                                     )
