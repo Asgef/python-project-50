@@ -6,17 +6,10 @@ TEMPLATE_NESTED = '{}    {}: {}'
 
 
 def diff_stylish_format(data, depth=0):
-    lines = []
     indent_char = '    '
     indent = indent_char * depth
     data.sort(key=lambda node: node['key'])
-
-    for node in data:
-        if node['status'] == 'nested':
-            lines.extend(format_node(node, depth, indent))
-        else:
-            lines.extend(format_node(node, depth, indent))
-
+    lines = [line for node in data for line in format_node(node, depth, indent)]
     result = itertools.chain('{', lines, [indent + '}'])
     return '\n'.join(result)
 
