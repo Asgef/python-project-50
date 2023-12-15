@@ -1,5 +1,5 @@
 from gendiff.construction_diff import open_file, create_diff
-from gendiff.stylish import diff_stylish_format
+from gendiff.formatters.stylish import diff_stylish_format
 
 
 def generate_diff(file1, file2, format='stylish'):
