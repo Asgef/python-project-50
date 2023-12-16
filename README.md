@@ -17,3 +17,5 @@ Brief overview of how the 'gendiff' application works
 [![asciicast](https://asciinema.org/a/J8oPJ6cTocyXii8w9LEFy6JJY.svg)](https://asciinema.org/a/J8oPJ6cTocyXii8w9LEFy6JJY)
 
 [![asciicast](https://asciinema.org/a/0qCF7BoDBA5Yt28NJtaglM60D.svg)](https://asciinema.org/a/0qCF7BoDBA5Yt28NJtaglM60D)
+
+[![asciicast](https://asciinema.org/a/Zw5oLp9d6ijV2G5O1skmc9qui.svg)](https://asciinema.org/a/Zw5oLp9d6ijV2G5O1skmc9qui)
