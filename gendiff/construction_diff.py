@@ -46,6 +46,7 @@ def create_diff(file1, file2):
 
 def format_value(data):
     nested_dict = {}
+
     if isinstance(data, bool):
         return str(data).lower()
     elif data is None:
@@ -55,6 +56,7 @@ def format_value(data):
             nested_dict[key] = format_value(data[key])
     else:
         return str(data)
+
     return nested_dict
 
 
