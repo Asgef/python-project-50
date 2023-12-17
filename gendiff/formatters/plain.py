@@ -1,7 +1,9 @@
-TEMPLATE_PLAIN_PATH = '{}.{}'
-TEMPLATE_PLAIN_ADDED = "Property '{}' was added with value: {}"
-TEMPLATE_PLAIN_REMOVED = "Property '{}' was removed"
-TEMPLATE_PLAIN_UPDATE = "Property '{}' was updated. From {} to {}"
+from gendiff.formatters.templates import (
+    TEMPLATE_PLAIN_PATH,
+    TEMPLATE_PLAIN_ADDED,
+    TEMPLATE_PLAIN_REMOVED,
+    TEMPLATE_PLAIN_UPDATE
+)
 
 
 def diff_plain_format(data, source=""):
@@ -16,8 +18,7 @@ def diff_plain_format(data, source=""):
 
         lines.extend(format_node(node, path))
 
-    result = '\n'.join(lines)
-    return result
+    return '\n'.join(lines)
 
 
 def format_node(data, path):
@@ -54,6 +55,7 @@ def format_node(data, path):
 
 
 def format_val(data):
+
     if isinstance(data, dict):
         return '[complex value]'
 

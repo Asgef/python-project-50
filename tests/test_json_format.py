@@ -31,4 +31,3 @@ def test_get_json():
     data = [{'key': 'key1', 'status': 'added', 'value_new': 'value2'}]
     expected = '{\n    "key1": {\n        "value": "value2",\n        "status": "added"\n    }\n}'
     assert get_json(data) == expected
-
