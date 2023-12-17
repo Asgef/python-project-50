@@ -1,5 +1,6 @@
+from gendiff.generate_diff import open_file
 from gendiff.formatters.stylish import diff_stylish_format, format_node
-from gendiff.construction_diff import open_file, create_diff
+from gendiff.construction_diff import create_diff
 import os
 
 

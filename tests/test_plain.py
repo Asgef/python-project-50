@@ -1,4 +1,5 @@
-from gendiff.construction_diff import open_file, create_diff
+from gendiff.generate_diff import open_file
+from gendiff.construction_diff import create_diff
 from gendiff.formatters.plain import diff_plain_format
 import os
 

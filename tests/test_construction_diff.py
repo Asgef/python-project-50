@@ -1,4 +1,5 @@
-from gendiff.construction_diff import add_node, create_diff, format_value, open_file
+from gendiff.generate_diff import open_file
+from gendiff.construction_diff import add_node, create_diff, format_value
 import os
 
 
