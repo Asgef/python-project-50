@@ -16,7 +16,8 @@ def generate_diff(file1, file2, format='stylish'):
 def select_format(data, form):
     if form == 'stylish':
         return diff_stylish_format(data)
-    if form == 'plain':
+
+    elif form == 'plain':
         return diff_plain_format(data)
-    if form == 'json':
+    elif form == 'json':
         return get_json(data)
