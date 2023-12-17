@@ -56,7 +56,12 @@ def format_node(data, path):
 def format_val(data):
     if isinstance(data, dict):
         return '[complex value]'
+
     elif data in ['false', 'true', 'null']:
         return data
+
     elif isinstance(data, str):
         return "'{}'".format(data)
+
+    elif isinstance(data, int):
+        return "{}".format(data)

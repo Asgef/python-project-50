@@ -55,7 +55,7 @@ def test_format_value():
     assert format_value(True) == 'true'
     assert format_value(False) == 'false'
     assert format_value(None) == 'null'
-    assert format_value(42) == '42'
+    assert format_value(42) == 42
     assert format_value([42]) == '[42]'
     assert format_value({'value': {'val1': True}}) == {'value': {'val1': 'true'}}
 

@@ -49,11 +49,17 @@ def format_value(data):
 
     if isinstance(data, bool):
         return str(data).lower()
+
     elif data is None:
         return 'null'
+
+    elif isinstance(data, int):
+        return data
+
     elif isinstance(data, dict):
         for key in data:
             nested_dict[key] = format_value(data[key])
+
     else:
         return str(data)
 

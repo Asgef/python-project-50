@@ -4,8 +4,8 @@ import os
 
 
 def test_diff_plain_format_added():
-    data = [{'key': 'key1', 'status': 'added', 'value_new': 'value2'}]
-    expected = "Property 'key1' was added with value: 'value2'"
+    data = [{'key': 'key1', 'status': 'added', 'value_new': 2}]
+    expected = "Property 'key1' was added with value: 2"
     assert diff_plain_format(data) == expected
 
 
