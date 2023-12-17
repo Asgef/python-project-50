@@ -38,7 +38,7 @@ def test_diff_plain_format_complex():
 
 def test_plain_general():
     test_directory = os.path.dirname(__file__)
-    file_result = os.path.join(test_directory, 'fixtures/result_plain')
+    file_result = os.path.join(test_directory, 'fixtures/results/result_plain')
     with open(file_result, 'r') as expected_file:
         expected = expected_file.read()
         data = create_diff(

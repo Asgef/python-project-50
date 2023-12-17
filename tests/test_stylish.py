@@ -37,7 +37,7 @@ def test_diff_stylish_format_nested():
 
 def test_diff_format_general():
     test_directory = os.path.dirname(__file__)
-    file_result = os.path.join(test_directory, 'fixtures/result_nested')
+    file_result = os.path.join(test_directory, 'fixtures/results/result_nested')
     with open(file_result, 'r') as expected_file:
         expected_data = expected_file.read()
         data = create_diff(
