@@ -1,8 +1,12 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Difference Generator - Calculates the difference between two data structures"
+classifiers = [
+    "CLI :: Tool :: Find the Difference",
+]
 authors = ["Ivan <asgefes1@gmail.com>"]
+repository = "https://github.com/Asgef/python-project-50"
 readme = "README.md"
 packages = [
  {include = "gendiff"},
