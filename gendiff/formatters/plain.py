@@ -6,7 +6,14 @@ from gendiff.formatters.templates import (
 )
 
 
-def diff_plain_format(data, source=""):
+def diff_plain_format(data: list, source: str = "") -> str:
+    """
+    Format the difference tree in "plain" format.
+
+    :param data: Difference tree.
+    :param source: A path to current node.
+    :return: A string of difference in "plain" format.
+    """
     lines = []
     data.sort(key=lambda node: node['key'])
 
@@ -21,7 +28,18 @@ def diff_plain_format(data, source=""):
     return '\n'.join(lines)
 
 
-def format_node(data, path):
+def format_node(data: dict, path: str) -> list:
+    """
+    Create a node representation in "plain" format.
+
+    :param data: The node representing a difference.
+    :type data: dict
+    :param path: The path to the current node.
+    :type path: str
+    :return: List of strings representing the difference lines for the node
+            in "plain" format.
+    :rtype: list
+    """
     line = []
 
     if data['status'] == 'added':
@@ -55,6 +73,20 @@ def format_node(data, path):
 
 
 def format_val(data):
+    """
+   Convert the dictionary in value to [complex value].
+
+   This function checks whether the value is a dictionary in the node value,
+   if true it returns [complex value].
+   Also substitutes string representations of the types
+   bool, None and int without quotes into the template.
+
+   :param data: The value to be converted.
+   :type data: str
+   :return: The string representation of the value or '[complex value]'
+            if the value is a dictionary.
+   :rtype: str
+   """
 
     if isinstance(data, dict):
         return '[complex value]'
