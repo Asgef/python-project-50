@@ -9,47 +9,47 @@ import os
     "key, status, value_old, value_new, children, expected",
     [
         (
-                'key1', 'added', None, 'value2', None, {
-                    'key': 'key1',
-                    'status': 'added',
-                    'value_new': 'value2'
-                }
+            'key1', 'added', None, 'value2', None, {
+                'key': 'key1',
+                'status': 'added',
+                'value_new': 'value2'
+            }
         ),
         (
-                'key2', 'changed', 'value1', 'value2', None, {
-                    'key': 'key2',
-                    'status': 'changed',
-                    'value_old': 'value1',
-                    'value_new': 'value2'
-                }
+            'key2', 'changed', 'value1', 'value2', None, {
+                'key': 'key2',
+                'status': 'changed',
+                'value_old': 'value1',
+                'value_new': 'value2'
+            }
         ),
         (
-                'key3', 'unchanged', 'value1', None, None, {
-                    'key': 'key3',
-                    'status': 'unchanged',
-                    'value_old': 'value1'
-                }
+            'key3', 'unchanged', 'value1', None, None, {
+                'key': 'key3',
+                'status': 'unchanged',
+                'value_old': 'value1'
+            }
         ),
         (
-                'key4', 'removed', 'value1', None, None, {
-                    'key': 'key4',
-                    'status': 'removed',
-                    'value_old': 'value1'
-                }
+            'key4', 'removed', 'value1', None, None, {
+                'key': 'key4',
+                'status': 'removed',
+                'value_old': 'value1'
+            }
         ),
         (
-                'key5', 'nested', None, None, [{
+            'key5', 'nested', None, None, [{
+                'key': 'child1',
+                'status': 'removed',
+                'value_old': 'value_child'
+            }],
+            {
+                "key": "key5", 'status': 'nested', 'children': [{
                     'key': 'child1',
                     'status': 'removed',
                     'value_old': 'value_child'
-                }],
-                {
-                    "key": "key5", 'status': 'nested', 'children': [{
-                        'key': 'child1',
-                        'status': 'removed',
-                        'value_old': 'value_child'
-                    }]
-                }
+                }]
+            }
         )
     ]
 )
