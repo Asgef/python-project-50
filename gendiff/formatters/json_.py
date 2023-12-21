@@ -60,5 +60,6 @@ def diff_json_format(data: list) -> str:
             diff_json[node['key']] = {
                 'value': diff_json_format(node['children'])
             }
+        diff_json[node['key']]['status'] = node_status
 
     return diff_json
