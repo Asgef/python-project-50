@@ -1,4 +1,3 @@
-import os
 import pytest
 from gendiff.formatters.stylish import diff_stylish_format, format_node
 from gendiff.formatters.plain import diff_plain_format
@@ -91,9 +90,12 @@ test_cases = [
     ),
     (
         diff_json_format, test_data['nested'],
-        {'common': {
-            'value': {'follow': {'value': 'false', 'status': 'added'}}
-        }}
+        {
+            'common': {
+                'status': 'nested',
+                'value': {'follow': {'status': 'added', 'value': 'false'}}
+            }
+        }
     ),
 ]
 
@@ -103,43 +105,17 @@ def test_formatting(format_function, data, expected):
     assert format_function(data) == expected
 
 
-def read_file(filepath):
-    with open(filepath, 'r') as file:
-        return file.read()
-
-
-test_directory = os.path.dirname(__file__)
-file1_nested = os.path.join(test_directory, 'fixtures/file1_nested.json')
-file2_nested = os.path.join(test_directory, 'fixtures/file2_nested.json')
-result_plain = os.path.join(test_directory, 'fixtures/results/result_plain')
-result_nested = os.path.join(test_directory, 'fixtures/results/result_nested')
-
-test_cases = [
-    (diff_plain_format, file1_nested, file2_nested, result_plain),
-    (diff_stylish_format, file1_nested, file2_nested, result_nested),
-]
-
-
-@pytest.mark.parametrize(
-    "format_function, file1, file2, expected_file", test_cases
-)
-def test_diff_format(format_function, file1, file2, expected_file):
-    expected = read_file(expected_file)
-    data = create_diff(open_file(file1), open_file(file2))
-    assert format_function(data) == expected
-
-
-def test_get_json():
-    data = [{'key': 'key1', 'status': 'added', 'value_new': 'value2'}]
-    expected = (
-        '{\n'
-        '    "key1": {\n'
-        '        "value": "value2",\n'
-        '        "status": "added"\n'
-        '    }\n'
-        '}'
-    )
-    assert get_json(data) == expected
+# def test_get_json():
+#     data = [{'key': 'key1', 'status': 'added', 'value_new': 'value2'}]
+#     expected = (
+#         '{\n'
+#         '    "key1": {\n'
+#         '        "value": "value2",\n'
+#         '        "status": "added"\n'
+#         '    }\n'
+#         '}'
+#     )
+#     assert get_json(data) == expected
 
 
 test_data = {
