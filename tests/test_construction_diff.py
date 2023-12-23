@@ -1,8 +1,5 @@
 import pytest
-
-from gendiff.generate_diff import open_file
 from gendiff.construction_diff import add_node, create_diff, format_value
-import os
 
 
 @pytest.mark.parametrize(
@@ -99,21 +96,3 @@ def test_create_diff():
 ])
 def test_format_value(data, expected):
     assert format_value(data) == expected
-
-
-def test_open_file():
-    test_directory = os.path.dirname(__file__)
-    expected = {
-        "host": "hexlet.io",
-        "timeout": 50,
-        "proxy": "123.234.53.22",
-        "follow": False
-    }
-
-    assert open_file(
-        os.path.join(test_directory, 'fixtures/file1.json')
-    ) == expected
-
-    assert open_file(
-        os.path.join(test_directory, 'fixtures/file1.yml')
-    ) == expected

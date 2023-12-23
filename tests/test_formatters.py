@@ -1,9 +1,8 @@
 import pytest
 from gendiff.formatters.stylish import diff_stylish_format, format_node
 from gendiff.formatters.plain import diff_plain_format
-from gendiff.formatters.json_ import get_json, diff_json_format
-from gendiff.construction_diff import create_diff
-from gendiff.generate_diff import open_file
+from gendiff.formatters.json_ import diff_json_format
+
 
 test_data = {
     'added': [{
