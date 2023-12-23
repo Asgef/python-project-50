@@ -75,7 +75,7 @@ def test_parse():
         'timeout: 50\n'
         'proxy: "123.234.53.22"\n'
         'follow: false'
-        )
+    )
     expected = {
         'host': 'hexlet.io',
         'timeout': 50,
