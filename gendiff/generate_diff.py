@@ -62,6 +62,5 @@ def open_file(file_path: str) -> tuple[str, str]:
         data_format = 'json'
     elif file_path.endswith('yaml') or file_path.endswith('yml'):
         data_format = 'yaml'
-    else:
-        raise FileNotFoundError('invalid file format')
+
     return text, data_format
