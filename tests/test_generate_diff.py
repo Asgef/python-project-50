@@ -11,16 +11,22 @@ def read_file(filepath):
 
 
 test_directory = os.path.dirname(__file__)
-file1 = os.path.join(test_directory, 'fixtures/file1_nested.json')
-file2 = os.path.join(test_directory, 'fixtures/file2_nested.json')
+file1_json = os.path.join(test_directory, 'fixtures/file1_nested.json')
+file2_json = os.path.join(test_directory, 'fixtures/file2_nested.json')
+file1_yaml = os.path.join(test_directory, 'fixtures/file1_nested.yaml')
+file2_yaml = os.path.join(test_directory, 'fixtures/file2_nested.yaml')
 plain_res = os.path.join(test_directory, 'fixtures/results/plain_nested')
 stylish_res = os.path.join(test_directory, 'fixtures/results/stylish_nested')
 json_res = os.path.join(test_directory, 'fixtures/results/json_nested')
 
 test_cases = [
-    (generate_diff, file1, file2, 'stylish', stylish_res),
-    (generate_diff, file1, file2, 'plain', plain_res),
-    (generate_diff, file1, file2, 'json', json_res)
+    (generate_diff, file1_json, file2_json, 'stylish', stylish_res),
+    (generate_diff, file1_json, file2_json, 'plain', plain_res),
+    (generate_diff, file1_json, file2_json, 'json', json_res),
+    (generate_diff, file1_yaml, file2_yaml, 'stylish', stylish_res),
+    (generate_diff, file1_yaml, file2_yaml, 'plain', plain_res),
+    (generate_diff, file1_yaml, file2_yaml, 'json', json_res)
+
 ]
 
 
