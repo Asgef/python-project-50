@@ -1,8 +1,8 @@
 import pytest
 from gendiff.formatters.stylish import diff_stylish_format, format_node
 from gendiff.formatters.plain import diff_plain_format
-from gendiff.formatters.json_ import diff_json_format
-
+# from gendiff.formatters.json_ import diff_json_format
+from gendiff.formatters.json_ import get_json
 
 test_data = {
     'added': [{
@@ -74,27 +74,51 @@ test_cases = [
     ),
 
     (
-        diff_json_format, test_data['added'],
-        {"key1": {"value": 2, "type": "added"}}
+        get_json, test_data['added'],
+        '[\n'
+        '    {\n'
+        '        "key": "key1",\n'
+        '        "type": "added",\n'
+        '        "value_new": 2\n'
+        '    }\n'
+        ']'
     ),
     (
-        diff_json_format, test_data['changed'],
-        {"key2": {
-            "value": "value1", "new value": "value2", "type": "changed"
-        }}
+        get_json, test_data['changed'],
+        '[\n'
+        '    {\n'
+        '        "key": "key2",\n'
+        '        "type": "changed",\n'
+        '        "value_new": "value2",\n'
+        '        "value_old": "value1"\n'
+        '    }\n'
+        ']'
     ),
     (
-        diff_json_format, test_data['removed'],
-        {'key4': {"value": "value1", "type": "removed"}}
+        get_json, test_data['removed'],
+        '[\n'
+        '    {\n'
+        '        "key": "key4",\n'
+        '        "type": "removed",\n'
+        '        "value_old": "value1"\n'
+        '    }\n'
+        ']'
     ),
     (
-        diff_json_format, test_data['nested'],
-        {
-            'common': {
-                'type': 'nested',
-                'value': {'follow': {'type': 'added', 'value': 'false'}}
-            }
-        }
+        get_json, test_data['nested'],
+        '[\n'
+        '    {\n'
+        '        "children": [\n'
+        '            {\n'
+        '                "key": "follow",\n'
+        '                "type": "added",\n'
+        '                "value_new": "false"\n'
+        '            }\n'
+        '        ],\n'
+        '        "key": "common",\n'
+        '        "type": "nested"\n'
+        '    }\n'
+        ']'
     ),
 ]
 

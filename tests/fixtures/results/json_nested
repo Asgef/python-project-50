@@ -1,98 +1,116 @@
-{
-    "common": {
-        "value": {
-            "follow": {
-                "value": "false",
-                "type": "added"
+[
+    {
+        "children": [
+            {
+                "key": "follow",
+                "type": "added",
+                "value_new": "false"
             },
-            "setting1": {
-                "value": "Value 1",
-                "type": "unchanged"
+            {
+                "key": "setting1",
+                "type": "unchanged",
+                "value_old": "Value 1"
             },
-            "setting2": {
-                "value": 200,
-                "type": "removed"
+            {
+                "key": "setting2",
+                "type": "removed",
+                "value_old": 200
             },
-            "setting3": {
-                "value": "true",
-                "new value": "null",
-                "type": "changed"
+            {
+                "key": "setting3",
+                "type": "changed",
+                "value_new": "null",
+                "value_old": "true"
             },
-            "setting4": {
-                "value": "blah blah",
-                "type": "added"
+            {
+                "key": "setting4",
+                "type": "added",
+                "value_new": "blah blah"
             },
-            "setting5": {
-                "value": {
+            {
+                "key": "setting5",
+                "type": "added",
+                "value_new": {
                     "key5": "value5"
-                },
-                "type": "added"
+                }
             },
-            "setting6": {
-                "value": {
-                    "doge": {
-                        "value": {
-                            "wow": {
-                                "value": "",
-                                "new value": "so much",
-                                "type": "changed"
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "key": "wow",
+                                "type": "changed",
+                                "value_new": "so much",
+                                "value_old": ""
                             }
-                        },
+                        ],
+                        "key": "doge",
                         "type": "nested"
                     },
-                    "key": {
-                        "value": "value",
-                        "type": "unchanged"
+                    {
+                        "key": "key",
+                        "type": "unchanged",
+                        "value_old": "value"
                     },
-                    "ops": {
-                        "value": "vops",
-                        "type": "added"
+                    {
+                        "key": "ops",
+                        "type": "added",
+                        "value_new": "vops"
                     }
-                },
+                ],
+                "key": "setting6",
                 "type": "nested"
             }
-        },
+        ],
+        "key": "common",
         "type": "nested"
     },
-    "group1": {
-        "value": {
-            "baz": {
-                "value": "bas",
-                "new value": "bars",
-                "type": "changed"
+    {
+        "children": [
+            {
+                "key": "baz",
+                "type": "changed",
+                "value_new": "bars",
+                "value_old": "bas"
             },
-            "foo": {
-                "value": "bar",
-                "type": "unchanged"
+            {
+                "key": "foo",
+                "type": "unchanged",
+                "value_old": "bar"
             },
-            "nest": {
-                "value": {
+            {
+                "key": "nest",
+                "type": "changed",
+                "value_new": "str",
+                "value_old": {
                     "key": "value"
-                },
-                "new value": "str",
-                "type": "changed"
+                }
             }
-        },
+        ],
+        "key": "group1",
         "type": "nested"
     },
-    "group2": {
-        "value": {
+    {
+        "key": "group2",
+        "type": "removed",
+        "value_old": {
             "abc": 12345,
             "deep": {
                 "id": 45
             }
-        },
-        "type": "removed"
+        }
     },
-    "group3": {
-        "value": {
+    {
+        "key": "group3",
+        "type": "added",
+        "value_new": {
             "deep": {
                 "id": {
                     "number": 45
                 }
             },
             "fee": 100500
-        },
-        "type": "added"
+        }
     }
-}
+]
