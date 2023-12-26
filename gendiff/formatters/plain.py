@@ -42,7 +42,7 @@ def format_node(data: dict, path: str) -> list:
     """
     line = []
 
-    if data['status'] == 'added':
+    if data['type'] == 'added':
         line.append(
             TEMPLATE_PLAIN_ADDED.format(
                 path,
@@ -50,12 +50,12 @@ def format_node(data: dict, path: str) -> list:
             )
         )
 
-    elif data['status'] == 'removed':
+    elif data['type'] == 'removed':
         line.append(
             TEMPLATE_PLAIN_REMOVED.format(path)
         )
 
-    elif data['status'] == 'changed':
+    elif data['type'] == 'changed':
         line.append(
             TEMPLATE_PLAIN_UPDATE.format(
                 path,
@@ -64,7 +64,7 @@ def format_node(data: dict, path: str) -> list:
             )
         )
 
-    elif data['status'] == 'nested':
+    elif data['type'] == 'nested':
         line.append(
             diff_plain_format(data['children'], path)
         )

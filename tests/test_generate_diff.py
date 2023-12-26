@@ -76,19 +76,19 @@ def test_parse(data, data_format, expected):
 
 
 @pytest.mark.parametrize(
-    "key, status, value_old, value_new, children, expected",
+    "key, type, value_old, value_new, children, expected",
     [
         (
             'key1', 'added', None, 'value2', None, {
                 'key': 'key1',
-                'status': 'added',
+                'type': 'added',
                 'value_new': 'value2'
             }
         ),
         (
             'key2', 'changed', 'value1', 'value2', None, {
                 'key': 'key2',
-                'status': 'changed',
+                'type': 'changed',
                 'value_old': 'value1',
                 'value_new': 'value2'
             }
@@ -96,38 +96,38 @@ def test_parse(data, data_format, expected):
         (
             'key3', 'unchanged', 'value1', None, None, {
                 'key': 'key3',
-                'status': 'unchanged',
+                'type': 'unchanged',
                 'value_old': 'value1'
             }
         ),
         (
             'key4', 'removed', 'value1', None, None, {
                 'key': 'key4',
-                'status': 'removed',
+                'type': 'removed',
                 'value_old': 'value1'
             }
         ),
         (
             'key5', 'nested', None, None, [{
                 'key': 'child1',
-                'status': 'removed',
+                'type': 'removed',
                 'value_old': 'value_child'
             }],
             {
-                "key": "key5", 'status': 'nested', 'children': [{
+                "key": "key5", 'type': 'nested', 'children': [{
                     'key': 'child1',
-                    'status': 'removed',
+                    'type': 'removed',
                     'value_old': 'value_child'
                 }]
             }
         )
     ]
 )
-def test_add_node(key, status, value_old, value_new, children, expected):
+def test_add_node(key, type, value_old, value_new, children, expected):
     if children is None:
-        node = add_node(key, status, value_old=value_old, value_new=value_new)
+        node = add_node(key, type, value_old=value_old, value_new=value_new)
     else:
-        node = add_node(key, status, children=children)
+        node = add_node(key, type, children=children)
     assert node == expected
 
 
@@ -145,17 +145,17 @@ def test_create_diff():
     }
 
     assert create_diff(data1, data2) == [
-        {'key': 'key1', 'status': 'unchanged', 'value_old': 'null'},
-        {'key': 'key2', 'status': 'removed', 'value_old': 'value2'},
+        {'key': 'key1', 'type': 'unchanged', 'value_old': 'null'},
+        {'key': 'key2', 'type': 'removed', 'value_old': 'value2'},
         {
-            'key': 'key3', 'status': 'nested', 'children': [{
+            'key': 'key3', 'type': 'nested', 'children': [{
                 'key': 'nested_key',
-                'status': 'changed',
+                'type': 'changed',
                 'value_old': 'nested_value',
                 'value_new': 'modified_nested_value'
             }]
         },
-        {'key': 'key4', 'status': 'added', 'value_new': 'true'}
+        {'key': 'key4', 'type': 'added', 'value_new': 'true'}
     ]
 
 

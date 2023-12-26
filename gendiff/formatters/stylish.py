@@ -48,17 +48,17 @@ def format_node(data: dict, depth: int, indent: str) -> list:
    """
     line = []
     step = 1
-    if data['status'] == 'added':
+    if data['type'] == 'added':
         line.append(line_format(
             data['key'], data['value_new'], depth, '+ ')
         )
 
-    elif data['status'] == 'removed':
+    elif data['type'] == 'removed':
         line.append(
             line_format(data['key'], data['value_old'], depth, '- ')
         )
 
-    elif data['status'] == 'changed':
+    elif data['type'] == 'changed':
         line.append(
             line_format(data['key'], data['value_old'], depth, '- ')
         )
@@ -66,12 +66,12 @@ def format_node(data: dict, depth: int, indent: str) -> list:
             line_format(data['key'], data['value_new'], depth, '+ ')
         )
 
-    elif data['status'] == 'unchanged':
+    elif data['type'] == 'unchanged':
         line.append(
             line_format(data['key'], data['value_old'], depth, '  ')
         )
 
-    elif data['status'] == 'nested':
+    elif data['type'] == 'nested':
         line.append(
             TEMPLATE_STYLISH.format(
                 indent, '  ', data['key'],

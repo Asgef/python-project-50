@@ -7,30 +7,30 @@ from gendiff.formatters.json_ import diff_json_format
 test_data = {
     'added': [{
         'key': 'key1',
-        'status': 'added',
+        'type': 'added',
         'value_new': 2
     }],
     'changed': [{
         'key': 'key2',
-        'status': 'changed',
+        'type': 'changed',
         'value_old': 'value1',
         'value_new': 'value2'
     }],
     'removed': [{
         'key': 'key4',
-        'status': 'removed',
+        'type': 'removed',
         'value_old': 'value1'
     }],
     'nested': [{
-        'key': 'common', 'status': 'nested', 'children': [{
+        'key': 'common', 'type': 'nested', 'children': [{
             'key': 'follow',
-            'status': 'added',
+            'type': 'added',
             'value_new': 'false'
         }]
     }],
     'complex': [{
         'key': 'key1',
-        'status': 'added',
+        'type': 'added',
         'value_new': {'key': 'follow'}
     }],
 }
@@ -75,24 +75,24 @@ test_cases = [
 
     (
         diff_json_format, test_data['added'],
-        {"key1": {"value": 2, "status": "added"}}
+        {"key1": {"value": 2, "type": "added"}}
     ),
     (
         diff_json_format, test_data['changed'],
         {"key2": {
-            "value": "value1", "new value": "value2", "status": "changed"
+            "value": "value1", "new value": "value2", "type": "changed"
         }}
     ),
     (
         diff_json_format, test_data['removed'],
-        {'key4': {"value": "value1", "status": "removed"}}
+        {'key4': {"value": "value1", "type": "removed"}}
     ),
     (
         diff_json_format, test_data['nested'],
         {
             'common': {
-                'status': 'nested',
-                'value': {'follow': {'status': 'added', 'value': 'false'}}
+                'type': 'nested',
+                'value': {'follow': {'type': 'added', 'value': 'false'}}
             }
         }
     ),
@@ -107,31 +107,31 @@ def test_formatting(format_function, data, expected):
 test_data = {
     'added': {
         'key': 'key1',
-        'status': 'added',
+        'type': 'added',
         'value_new': 42
     },
     'removed': {
         'key': 'key4',
-        'status': 'removed',
+        'type': 'removed',
         'value_old': 'null'
     },
     'changed': {
         'key': 'key2',
-        'status': 'changed',
+        'type': 'changed',
         'value_old': 'true',
         'value_new': 'false'
     },
     'unchanged': {
         'key': 'key3',
-        'status': 'unchanged',
+        'type': 'unchanged',
         'value_old': 'value1'
     },
     'nested': {
         "key": "key5",
-        'status': 'nested',
+        'type': 'nested',
         'children': [{
             'key': 'child',
-            'status': 'removed',
+            'type': 'removed',
             'value_old': 'value_child'
         }]
     },

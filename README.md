@@ -78,8 +78,8 @@ or
 
 ### JSON format
 
-[![asciicast](https://asciinema.org/a/Zw5oLp9d6ijV2G5O1skmc9qui.svg)](https://asciinema.org/a/Zw5oLp9d6ijV2G5O1skmc9qui)
+[![asciicast](https://asciinema.org/a/ZDKS2UItKhZitU2aUtqfNU4I3.svg)](https://asciinema.org/a/ZDKS2UItKhZitU2aUtqfNU4I3)
 
 #### Comparison of 2 nested files:
 
-[![asciicast](https://asciinema.org/a/RTiviMDg41uMbHbyxWRLKgGMF.svg)](https://asciinema.org/a/RTiviMDg41uMbHbyxWRLKgGMF)
+[![asciicast](https://asciinema.org/a/AdjcW0NZ4dG9BoNsyEtE17Gku.svg)](https://asciinema.org/a/AdjcW0NZ4dG9BoNsyEtE17Gku)

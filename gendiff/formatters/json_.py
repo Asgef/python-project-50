@@ -35,31 +35,31 @@ def diff_json_format(data: list) -> str:
     data.sort(key=lambda node: node['key'])
 
     for node in data:
-        node_status = node['status']
+        node_type = node['type']
 
-        if node['status'] == 'added':
+        if node['type'] == 'added':
             diff_json[node['key']] = {
                 'value': node['value_new'],
-                'status': node_status
+                'type': node_type
             }
 
-        elif node['status'] in ['removed', 'unchanged']:
+        elif node['type'] in ['removed', 'unchanged']:
             diff_json[node['key']] = {
                 'value': node['value_old'],
-                'status': node_status
+                'type': node_type
             }
 
-        elif node['status'] == 'changed':
+        elif node['type'] == 'changed':
             diff_json[node['key']] = {
                 'value': node['value_old'],
                 'new value': node['value_new'],
-                'status': node_status
+                'type': node_type
             }
 
-        elif node['status'] == 'nested':
+        elif node['type'] == 'nested':
             diff_json[node['key']] = {
                 'value': diff_json_format(node['children'])
             }
-        diff_json[node['key']]['status'] = node_status
+        diff_json[node['key']]['type'] = node_type
 
     return diff_json

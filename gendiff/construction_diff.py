@@ -5,8 +5,8 @@ def create_diff(file1: dict, file2: dict) -> list:
     This function takes two dictionaries as input and compares their keys and
     meanings to identify differences between them. It returns a list,
     representing a tree where each node contains information about the key
-    status (added, removed, unchanged, modified or nested) and
-    corresponding values for the corresponding status.
+    type (added, removed, unchanged, modified or nested) and
+    corresponding values for the corresponding type.
 
     :param file1: The first dictionary to compare.
     :type file1: dict
@@ -46,7 +46,7 @@ def create_diff(file1: dict, file2: dict) -> list:
 
 def add_node(
         key: str,
-        status: str,
+        type: str,
         value_old=None,
         value_new=None,
         children=None
@@ -56,13 +56,13 @@ def add_node(
 
     This function creates a node for the diff tree representing
     the difference between two keys in the compared dictionaries. Knot
-    contains information about the key, difference status (added,
+    contains information about the key, difference type (added,
     deleted, modified, not modified, or nested), as well as the corresponding
-    values for corresponding difference status.
+    values for corresponding difference type.
 
     :param key: The key representing the difference.
     :type key: str
-    :param status: Difference status (added, deleted, unchanged,
+    :param type: Difference type (added, deleted, unchanged,
                       modified or nested).
     :param value_old: The old value associated with the key (optional).
     :type value_old: any
@@ -74,7 +74,7 @@ def add_node(
     :return: A dictionary representing the difference tree node.
     :rtype: dict
     """
-    node = {'key': key, 'status': status}
+    node = {'key': key, 'type': type}
 
     if value_old is not None:
         node['value_old'] = value_old

@@ -3,30 +3,30 @@
         "value": {
             "follow": {
                 "value": "false",
-                "status": "added"
+                "type": "added"
             },
             "setting1": {
                 "value": "Value 1",
-                "status": "unchanged"
+                "type": "unchanged"
             },
             "setting2": {
                 "value": 200,
-                "status": "removed"
+                "type": "removed"
             },
             "setting3": {
                 "value": "true",
                 "new value": "null",
-                "status": "changed"
+                "type": "changed"
             },
             "setting4": {
                 "value": "blah blah",
-                "status": "added"
+                "type": "added"
             },
             "setting5": {
                 "value": {
                     "key5": "value5"
                 },
-                "status": "added"
+                "type": "added"
             },
             "setting6": {
                 "value": {
@@ -35,45 +35,45 @@
                             "wow": {
                                 "value": "",
                                 "new value": "so much",
-                                "status": "changed"
+                                "type": "changed"
                             }
                         },
-                        "status": "nested"
+                        "type": "nested"
                     },
                     "key": {
                         "value": "value",
-                        "status": "unchanged"
+                        "type": "unchanged"
                     },
                     "ops": {
                         "value": "vops",
-                        "status": "added"
+                        "type": "added"
                     }
                 },
-                "status": "nested"
+                "type": "nested"
             }
         },
-        "status": "nested"
+        "type": "nested"
     },
     "group1": {
         "value": {
             "baz": {
                 "value": "bas",
                 "new value": "bars",
-                "status": "changed"
+                "type": "changed"
             },
             "foo": {
                 "value": "bar",
-                "status": "unchanged"
+                "type": "unchanged"
             },
             "nest": {
                 "value": {
                     "key": "value"
                 },
                 "new value": "str",
-                "status": "changed"
+                "type": "changed"
             }
         },
-        "status": "nested"
+        "type": "nested"
     },
     "group2": {
         "value": {
@@ -82,7 +82,7 @@
                 "id": 45
             }
         },
-        "status": "removed"
+        "type": "removed"
     },
     "group3": {
         "value": {
@@ -93,6 +93,6 @@
             },
             "fee": 100500
         },
-        "status": "added"
+        "type": "added"
     }
 }
