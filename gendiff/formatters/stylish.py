@@ -19,7 +19,6 @@ def diff_stylish_format(data: list, depth: int = 0) -> str:
     """
     indent_char = '    '
     indent = indent_char * depth
-    data.sort(key=lambda node: node['key'])
 
     lines = [line for node in data for line in format_node(node, depth, indent)]
 

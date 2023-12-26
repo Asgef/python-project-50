@@ -15,7 +15,6 @@ def diff_plain_format(data: list, source: str = "") -> str:
     :return: A string of difference in "plain" format.
     """
     lines = []
-    data.sort(key=lambda node: node['key'])
 
     for node in data:
         if source:
