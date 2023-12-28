@@ -2,7 +2,7 @@ import os
 import pytest
 from gendiff.parser import parse
 from gendiff.generate_diff import generate_diff
-from gendiff.construction_diff import add_node, create_diff, format_value
+from gendiff.construction_diff import create_diff
 
 
 def read_file(filepath):
@@ -75,62 +75,6 @@ def test_parse(data, data_format, expected):
     assert parse(data, data_format) == expected
 
 
-@pytest.mark.parametrize(
-    "key, type, value_old, value_new, children, expected",
-    [
-        (
-            'key1', 'added', None, 'value2', None, {
-                'key': 'key1',
-                'type': 'added',
-                'value_new': 'value2'
-            }
-        ),
-        (
-            'key2', 'changed', 'value1', 'value2', None, {
-                'key': 'key2',
-                'type': 'changed',
-                'value_old': 'value1',
-                'value_new': 'value2'
-            }
-        ),
-        (
-            'key3', 'unchanged', 'value1', None, None, {
-                'key': 'key3',
-                'type': 'unchanged',
-                'value_old': 'value1'
-            }
-        ),
-        (
-            'key4', 'removed', 'value1', None, None, {
-                'key': 'key4',
-                'type': 'removed',
-                'value_old': 'value1'
-            }
-        ),
-        (
-            'key5', 'nested', None, None, [{
-                'key': 'child1',
-                'type': 'removed',
-                'value_old': 'value_child'
-            }],
-            {
-                "key": "key5", 'type': 'nested', 'children': [{
-                    'key': 'child1',
-                    'type': 'removed',
-                    'value_old': 'value_child'
-                }]
-            }
-        )
-    ]
-)
-def test_add_node(key, type, value_old, value_new, children, expected):
-    if children is None:
-        node = add_node(key, type, value_old=value_old, value_new=value_new)
-    else:
-        node = add_node(key, type, children=children)
-    assert node == expected
-
-
 def test_create_diff():
     data1 = {
         'key1': None,
@@ -145,7 +89,7 @@ def test_create_diff():
     }
 
     assert create_diff(data1, data2) == [
-        {'key': 'key1', 'type': 'unchanged', 'value_old': 'null'},
+        {'key': 'key1', 'type': 'unchanged', 'value_old': None},
         {'key': 'key2', 'type': 'removed', 'value_old': 'value2'},
         {
             'key': 'key3', 'type': 'nested', 'children': [{
@@ -155,17 +99,5 @@ def test_create_diff():
                 'value_new': 'modified_nested_value'
             }]
         },
-        {'key': 'key4', 'type': 'added', 'value_new': 'true'}
+        {'key': 'key4', 'type': 'added', 'value_new': True}
     ]
-
-
-@pytest.mark.parametrize("data, expected", [
-    (True, 'true'),
-    (False, 'false'),
-    (None, 'null'),
-    (42, 42),
-    ([42], '[42]'),
-    ({'value': {'val1': True}}, {'value': {'val1': 'true'}})
-])
-def test_format_value(data, expected):
-    assert format_value(data) == expected
