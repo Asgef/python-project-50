@@ -111,7 +111,7 @@ def line_format(key: str, value: any, depth: int, char: str) -> str:
 
     else:
         line.append(TEMPLATE_STYLISH.format(
-            indent, char, key, value)
+            indent, char, key, format_value(value))
         )
 
     return '\n'.join(line)
@@ -141,3 +141,31 @@ def dict_format(data: dict, depth: int):
     result = itertools.chain('{', line, [indent + '}'])
 
     return '\n'.join(result)
+
+
+def format_value(data):
+    """
+    This function takes values in dictionaries
+    and converts it to a string representation other than integer.
+    Dictionaries and their values are processed recursively.
+    :param data: The value to be converted to a string.
+    :type data: any
+    :return: A string representation of a value or a dictionary.
+    :rtype: str or dict
+    """
+    nested_dict = {}
+
+    if isinstance(data, bool):
+        return str(data).lower()
+
+    elif data is None:
+        return 'null'
+
+    elif isinstance(data, dict):
+        for key in data:
+            nested_dict[key] = format_value(data[key])
+
+    else:
+        return data
+
+    return nested_dict

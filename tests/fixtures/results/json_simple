@@ -2,7 +2,7 @@
     {
         "key": "follow",
         "type": "removed",
-        "value_old": "false"
+        "value_old": false
     },
     {
         "key": "host",
@@ -23,6 +23,6 @@
     {
         "key": "verbose",
         "type": "added",
-        "value_new": "true"
+        "value_new": true
     }
 ]

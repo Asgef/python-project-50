@@ -1,5 +1,7 @@
 import pytest
-from gendiff.formatters.stylish import diff_stylish_format, format_node
+from gendiff.formatters.stylish import (
+    diff_stylish_format, format_node, format_value
+)
 from gendiff.formatters.plain import diff_plain_format
 from gendiff.formatters.json_ import get_json
 
@@ -7,13 +9,13 @@ test_data = {
     'added': [{
         'key': 'key1',
         'type': 'added',
-        'value_new': 2
+        'value_new': 42
     }],
     'changed': [{
         'key': 'key2',
         'type': 'changed',
-        'value_old': 'value1',
-        'value_new': 'value2'
+        'value_old': False,
+        'value_new': True
     }],
     'removed': [{
         'key': 'key4',
@@ -24,7 +26,7 @@ test_data = {
         'key': 'common', 'type': 'nested', 'children': [{
             'key': 'follow',
             'type': 'added',
-            'value_new': 'false'
+            'value_new': False
         }]
     }],
     'complex': [{
@@ -37,11 +39,11 @@ test_data = {
 test_cases = [
     (
         diff_stylish_format, test_data['added'],
-        '{\n  + key1: 2\n}'
+        '{\n  + key1: 42\n}'
     ),
     (
         diff_stylish_format, test_data['changed'],
-        '{\n  - key2: value1\n  + key2: value2\n}'
+        '{\n  - key2: false\n  + key2: true\n}'
     ),
     (
         diff_stylish_format, test_data['removed'],
@@ -54,11 +56,11 @@ test_cases = [
 
     (
         diff_plain_format, test_data['added'],
-        "Property 'key1' was added with value: 2"
+        "Property 'key1' was added with value: 42"
     ),
     (
         diff_plain_format, test_data['changed'],
-        "Property 'key2' was updated. From 'value1' to 'value2'"
+        "Property 'key2' was updated. From false to true"
     ),
     (
         diff_plain_format, test_data['removed'],
@@ -78,7 +80,7 @@ test_cases = [
         '    {\n'
         '        "key": "key1",\n'
         '        "type": "added",\n'
-        '        "value_new": 2\n'
+        '        "value_new": 42\n'
         '    }\n'
         ']'
     ),
@@ -88,8 +90,8 @@ test_cases = [
         '    {\n'
         '        "key": "key2",\n'
         '        "type": "changed",\n'
-        '        "value_new": "value2",\n'
-        '        "value_old": "value1"\n'
+        '        "value_new": true,\n'
+        '        "value_old": false\n'
         '    }\n'
         ']'
     ),
@@ -111,7 +113,7 @@ test_cases = [
         '            {\n'
         '                "key": "follow",\n'
         '                "type": "added",\n'
-        '                "value_new": "false"\n'
+        '                "value_new": false\n'
         '            }\n'
         '        ],\n'
         '        "key": "common",\n'
@@ -189,3 +191,14 @@ test_cases = [
 )
 def test_format_node(format_function, data, depth, indent, expected):
     assert format_function(data, depth, indent) == expected
+
+
+@pytest.mark.parametrize("data, expected", [
+    (True, 'true'),
+    (False, 'false'),
+    (None, 'null'),
+    (42, 42),
+    ({'value': {'val1': True}}, {'value': {'val1': 'true'}})
+])
+def test_format_value(data, expected):
+    assert format_value(data) == expected

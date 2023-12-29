@@ -4,7 +4,7 @@
             {
                 "key": "follow",
                 "type": "added",
-                "value_new": "false"
+                "value_new": false
             },
             {
                 "key": "setting1",
@@ -19,8 +19,8 @@
             {
                 "key": "setting3",
                 "type": "changed",
-                "value_new": "null",
-                "value_old": "true"
+                "value_new": null,
+                "value_old": true
             },
             {
                 "key": "setting4",

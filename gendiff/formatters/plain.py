@@ -90,8 +90,11 @@ def format_val(data):
     if isinstance(data, dict):
         return '[complex value]'
 
-    elif data in ['false', 'true', 'null']:
-        return data
+    elif isinstance(data, bool):
+        return str(data).lower()
+
+    elif data is None:
+        return 'null'
 
     elif isinstance(data, str):
         return "'{}'".format(data)
