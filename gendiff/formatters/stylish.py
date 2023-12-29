@@ -1,5 +1,9 @@
-import itertools
+from itertools import chain
 from gendiff.formatters.templates import TEMPLATE_STYLISH
+
+
+INDENT_CHAR = '    '
+STEP = 1
 
 
 def diff_stylish_format(data: list, depth: int = 0) -> str:
@@ -17,17 +21,16 @@ def diff_stylish_format(data: list, depth: int = 0) -> str:
     :return: String representation of the difference in "stylish" format.
     :rtype: str
     """
-    indent_char = '    '
-    indent = indent_char * depth
+    indent = INDENT_CHAR * depth
 
-    lines = [line for node in data for line in format_node(node, depth, indent)]
+    lines = [line for node in data for line in format_node(node, depth)]
 
-    result = itertools.chain('{', lines, [indent + '}'])
+    result = chain('{', lines, [indent + '}'])
 
     return '\n'.join(result)
 
 
-def format_node(data: dict, depth: int, indent: str) -> list:
+def format_node(data: dict, depth: int) -> list:
     """
    Format the node in a "stylish" format.
 
@@ -39,14 +42,11 @@ def format_node(data: dict, depth: int, indent: str) -> list:
    :type data: dict
    :param depth: Current depth level.
    :type depth: int
-   :param indent: Indentation string for the current depth level.
-   :type indent: str
    :return: List of strings representing the difference lines for the node
             in "stylish" format.
    :rtype: list
    """
     line = []
-    step = 1
     if data['type'] == 'added':
         line.append(line_format(
             data['key'], data['value_new'], depth, '+ ')
@@ -71,11 +71,18 @@ def format_node(data: dict, depth: int, indent: str) -> list:
         )
 
     elif data['type'] == 'nested':
+
+        nest_indent = INDENT_CHAR * (depth + STEP)
+
+        nested_lines = [
+            line
+            for child in data['children']
+            for line in format_node(child, depth + STEP)
+        ]
+
+        nested_block = '\n'.join(nested_lines)
         line.append(
-            TEMPLATE_STYLISH.format(
-                indent, '  ', data['key'],
-                diff_stylish_format(data['children'], depth + step)
-            )
+            f'{nest_indent}{data["key"]}: {{\n{nested_block}\n{nest_indent}}}'
         )
 
     return line
@@ -99,14 +106,12 @@ def line_format(key: str, value: any, depth: int, char: str) -> str:
     :return: String representation of the line in "stylish" format.
     :rtype: str
     """
-    indent_char = '    '
-    indent = indent_char * depth
-    step = 1
+    indent = INDENT_CHAR * depth
     line = []
 
     if isinstance(value, dict):
         line.append(TEMPLATE_STYLISH.format(
-            indent, char, key, dict_format(value, depth + step))
+            indent, char, key, dict_format(value, depth + STEP))
         )
 
     else:
@@ -131,14 +136,13 @@ def dict_format(data: dict, depth: int):
     :return: String representation of the dictionary in "stylish" format.
     :rtype: str
     """
-    indent_char = '    '
-    indent = indent_char * depth
+    indent = INDENT_CHAR * depth
     line = []
 
     for key, value in data.items():
         line.append(line_format(key, value, depth, '  '))
 
-    result = itertools.chain('{', line, [indent + '}'])
+    result = chain('{', line, [indent + '}'])
 
     return '\n'.join(result)
 

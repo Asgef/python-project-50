@@ -6,23 +6,14 @@ from gendiff.formatters.templates import (
 )
 
 
-def diff_plain_format(data: list, source: str = "") -> str:
+def diff_plain_format(data: list) -> str:
     """
     Format the difference tree in "plain" format.
 
     :param data: Difference tree.
-    :param source: A path to current node.
     :return: A string of difference in "plain" format.
     """
-    lines = []
-
-    for node in data:
-        if source:
-            path = TEMPLATE_PLAIN_PATH.format(source, node['key'])
-        else:
-            path = node['key']
-
-        lines.extend(format_node(node, path))
+    lines = [line for node in data for line in format_node(node, node['key'])]
 
     return '\n'.join(lines)
 
@@ -64,9 +55,9 @@ def format_node(data: dict, path: str) -> list:
         )
 
     elif data['type'] == 'nested':
-        line.append(
-            diff_plain_format(data['children'], path)
-        )
+        for child in data['children']:
+            nested_path = TEMPLATE_PLAIN_PATH.format(path, child['key'])
+            line.extend(format_node(child, nested_path))
 
     return line
 

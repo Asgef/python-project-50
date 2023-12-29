@@ -164,33 +164,33 @@ test_data = {
 
 test_cases = [
     (
-        format_node, test_data['added'], 0, '    ',
+        format_node, test_data['added'], 0,
         ['  + key1: 42']
     ),
     (
-        format_node, test_data['removed'], 1, '   ',
+        format_node, test_data['removed'], 1,
         ['      - key4: null']
     ),
     (
-        format_node, test_data['changed'], 0, '   ',
+        format_node, test_data['changed'], 0,
         ['  - key2: true', '  + key2: false']
     ),
     (
-        format_node, test_data['unchanged'], 0, '   ',
+        format_node, test_data['unchanged'], 0,
         ['    key3: value1']
     ),
     (
-        format_node, test_data['nested'], 0, '   ',
-        ['       key5: {\n      - child: value_child\n    }']
+        format_node, test_data['nested'], 0,
+        ['    key5: {\n      - child: value_child\n    }']
     ),
 ]
 
 
 @pytest.mark.parametrize(
-    "format_function, data, depth, indent, expected", test_cases
+    "format_function, data, depth, expected", test_cases
 )
-def test_format_node(format_function, data, depth, indent, expected):
-    assert format_function(data, depth, indent) == expected
+def test_format_node(format_function, data, depth, expected):
+    assert format_function(data, depth) == expected
 
 
 @pytest.mark.parametrize("data, expected", [
