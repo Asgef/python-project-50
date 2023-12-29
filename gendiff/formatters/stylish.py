@@ -135,7 +135,7 @@ def dict_format(data: dict, depth: int):
     indent = indent_char * depth
     line = []
 
-    for key, value in sorted(data.items()):
+    for key, value in data.items():
         line.append(line_format(key, value, depth, '  '))
 
     result = itertools.chain('{', line, [indent + '}'])
